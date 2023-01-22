@@ -9,9 +9,9 @@
 
 .description {
   display: inherit;
-  justify-content: inherit;
-  align-items: inherit;
-  font-size: 0.85rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
   max-width: var(--max-width);
   width: 100%;
   z-index: 2;
@@ -204,7 +204,7 @@
   }
 
   .description {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   .description a {
