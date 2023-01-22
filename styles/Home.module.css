@@ -16,6 +16,8 @@
   width: 100%;
   z-index: 2;
   font-family: var(--font-mono);
+  flex-direction: column;
+  column-gap: 10px;
 }
 
 .description a {
@@ -25,13 +27,27 @@
   gap: 0.5rem;
 }
 
-.description p {
-  position: relative;
-  margin: 0;
-  padding: 1rem;
+.description form {
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.description form input {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
   background-color: rgba(var(--callout-rgb), 0.5);
-  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+  border: 1px solid rgba(var(--card-border-rgb), 0.3);
   border-radius: var(--border-radius);
+}
+
+.description form button {
+  margin-top: 20px;
+  width: 100px;
+  height: 30px;
 }
 
 .code {

@@ -16,11 +16,8 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
-          Shorten Your URL
-          {/* <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.tsx</code>
-          </p>
+          <p>Shorten Your URL</p>
+          {/* 
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
@@ -38,6 +35,10 @@ export default function Home() {
               />
             </a>
           </div> */}
+          <form action="/send-data-here" method="post">
+            <input type="url" id="long_url" name="long_url" required placeholder="Your URL.."/>
+            <button type="submit">Submit</button>
+          </form>
         </div>
 
         {/* <div className={styles.center}>
