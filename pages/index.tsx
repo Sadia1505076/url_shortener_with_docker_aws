@@ -2,10 +2,34 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
+import { useState, useRef, Suspense, HtmlHTMLAttributes, FormEventHandler } from 'react';
+import fetcher from 'lib/fetcher';
+import { Form, FormState } from 'lib/types';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const [form, setForm] = useState<FormState>({ state: Form.Initial });
+
+  const [url, setUrl] = useState("");
+  
+  const onChange = (e: React.FormEvent<HTMLInputElement>): void => {
+    setUrl(e.currentTarget.value);
+  };
+
+  const leaveEntry = async (e: { preventDefault: () => void; target: any; }) => {
+    e.preventDefault();
+    console.log("url is:", url);
+    const res = await fetch('/api/hello', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({url: url.toString()})
+    });
+    console.log("inside leave entry, after the api call", res);
+  };
+
   return (
     <>
       <Head>
@@ -17,6 +41,7 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.description}>
           <p>Shorten Your URL</p>
+          {/* <p>result of the api call: {result}</p> */}
           {/* 
           <div>
             <a
@@ -35,8 +60,8 @@ export default function Home() {
               />
             </a>
           </div> */}
-          <form action="/send-data-here" method="post">
-            <input type="url" id="long_url" name="long_url" required placeholder="Your URL.."/>
+          <form method="post" onSubmit={leaveEntry}>
+            <input type="url" id="long_url" name="long_url" required placeholder="Your URL.." onChange={onChange}/>
             <button type="submit">Submit</button>
           </form>
         </div>
