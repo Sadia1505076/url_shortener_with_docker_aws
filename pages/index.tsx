@@ -1,9 +1,7 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useState, useRef, Suspense, HtmlHTMLAttributes, FormEventHandler } from 'react';
-import fetcher from 'lib/fetcher';
 import { Form, FormState } from 'lib/types';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -20,7 +18,7 @@ export default function Home() {
   const leaveEntry = async (e: { preventDefault: () => void; target: any; }) => {
     e.preventDefault();
     console.log("url is:", url);
-    const res = await fetch('/api/hello', {
+    const res = await fetch('/api/short_url', {
       headers: {
         'Content-Type': 'application/json'
       },
