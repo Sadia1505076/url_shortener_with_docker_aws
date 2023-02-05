@@ -1,4 +1,4 @@
-export function jsonStringifier(json: any): string {
+export function customJsonStringify(json: any): string {
   return JSON.stringify(json, (_, value) =>
     typeof value === "bigint" ? value.toString() : value
   );

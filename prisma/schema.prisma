@@ -23,15 +23,3 @@ model Url {
 
   @@index([short_url], map: "idx_url_short")
 }
-
-model e0c04a_8618_50e0_ade5_8c3eb67fcc27_20230201092203_vrepl {
-  id         Int      @id @default(autoincrement())
-  ticket     BigInt
-  long_url   String   @db.VarChar(2083)
-  short_url  String   @db.VarChar(20)
-  created_on DateTime @default(now()) @db.DateTime(0)
-  expire_on  DateTime @db.DateTime(0)
-
-  @@index([short_url], map: "idx_url_short")
-  @@map("_27e0c04a_8618_50e0_ade5_8c3eb67fcc27_20230201092203_vrepl")
-}
