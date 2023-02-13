@@ -23,19 +23,19 @@ export default async function handler(
         if (short_url.length < MIN_URL_LENGTH) {
           short_url = genRandomString(3 - short_url.length) + short_url;
         };
-        let current_date = moment();
-        let expire_date = moment().add(EXPIRE_DAYS, 'days');
+        let current_date: moment.Moment = moment();
+        let expire_date:  moment.Moment = moment().add(EXPIRE_DAYS, 'days');
 
         await prisma.url.create({
           data: {
             ticket:     BigInt(ticket),
-            long_url:   req.body.url,
+            long_url:   req.body.url, 
             expire_on:  expire_date.toDate(),
             created_on: current_date.toDate(),
             short_url,
           }
         });
-        return res.status(200).json(short_url);
+        return res.status(201).json({short_url: short_url});
       }
       catch(error)  {
         return res.status(500).json("Failed to capture ticket!" + error);

@@ -1,11 +1,2 @@
-export enum Form {
-    Initial,
-    Loading,
-    Success,
-    Error
-}
-
-export type FormState = {
-    state: Form;
-    message?: string;
-};
+export type CopiedValue = boolean;
+export type CopyFn      = (text: string) => Promise<boolean>;

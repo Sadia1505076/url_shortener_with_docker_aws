@@ -16,6 +16,11 @@ export function genRandomString(length: number): string {
   return result;
 }
 
+export function isNullOrEmpty(str: string): boolean {
+  if (str.length == 0 || str == null || str == undefined) return true;
+  return false;
+}
+
 class Base62 {
   private readonly base: bigint = BigInt(62);
   private readonly charset: string[] = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
