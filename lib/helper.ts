@@ -40,13 +40,6 @@ class Base62 {
 
     return str.join('');
   }
-
-  // public decode(str: string): string {
-  //   return str.split('').reverse().reduce(
-  //     (prev: bigint, char: string, i: number) =>
-  //       prev + (BigInt(this.charset.indexOf(char)) * (this.base ** BigInt(i))),
-  //     BigInt(0)).toString();
-  // }
 }
 
 export const base62: Base62 = new Base62();
