@@ -1,3 +1,5 @@
+import { stringOrNull } from "./types";
+
 export function customJsonStringify(json: any): string {
   return JSON.stringify(json, (_, value) =>
     typeof value === "bigint" ? value.toString() : value
@@ -14,11 +16,6 @@ export function genRandomString(length: number): string {
     counter += 1;
   }
   return result;
-}
-
-export function isNullOrEmpty(str: string): boolean {
-  if (str.length == 0 || str == null || str == undefined) return true;
-  return false;
 }
 
 class Base62 {

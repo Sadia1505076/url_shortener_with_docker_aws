@@ -127,6 +127,17 @@
   cursor: pointer;
 }
 
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error {
+  font-size: 1rem;
+  color: red;
+}
+
 /* Mobile */
 @media (max-width: 700px) {
   .container {
@@ -162,6 +173,10 @@
   }
 
   .tooltipText {
+    font-size: 0.7rem;
+  }
+
+  .error {
     font-size: 0.7rem;
   }
 }
