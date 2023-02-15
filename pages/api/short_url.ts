@@ -1,24 +1,28 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prisma';
-import { customJsonStringify,  base62, genRandomString } from 'lib/helper';
+import { base62, genRandomString } from 'lib/helper';
 import moment from 'moment';
 import { EXPIRE_DAYS, MIN_URL_LENGTH } from '@/lib/global';
+import { Tickets64 } from '@prisma/client';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
+    const start = new Date().getTime();
     const [_, ticketQueryResult] = await prisma.$transaction([
-      prisma.$queryRaw`REPLACE INTO Tickets64 (stub) VALUES ('a');`,
-      prisma.$queryRaw`SELECT LAST_INSERT_ID();`
-    ])
-    let jsonStringifiedResult: string   = customJsonStringify(ticketQueryResult);
-    let splittedResult:        string[] = jsonStringifiedResult.split(/[\[\]{}:"]/).filter(s => s != "");
-    if(splittedResult.length >= 1) {
-      let ticketAsString: string = splittedResult[1];
+      prisma.$queryRaw<Tickets64>`REPLACE INTO Tickets64 (stub) VALUES ('a');`,
+      prisma.tickets64.findFirst({
+        where: {
+          stub: 'a'
+        }
+      })
+    ]);
+
+    if(ticketQueryResult != null) {
       try {
-        let ticket:    number = +ticketAsString;
+        let ticket:    number = Number(ticketQueryResult.id);
         let short_url: string = base62.encode(ticket);
         if (short_url.length < MIN_URL_LENGTH) {
           short_url = genRandomString(3 - short_url.length) + short_url;
