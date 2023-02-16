@@ -1,24 +1,26 @@
 import Head                    from 'next/head'
 import styles                  from '@/styles/Home.module.css'
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Loader                  from '@/components/Loader/loader';
 import Image                   from 'next/image';
 import { stringOrNull }        from '@/lib/types';
+import { useQRCode } from 'next-qrcode';
 
 export default function Home() {
-  const [longUrl,       setLongUrl]       = useState<stringOrNull>(null);
-  const [encodedTicket, setEncodedTicket] = useState<stringOrNull>(null);
-  const [isLoading,     setIsLoading]     = useState(false);
-  const [isCopied,      setIsCopied]      = useState(false);
-  const [shortUrlHost,  setShortUrlHost]  = useState<stringOrNull>(null);
-  const [errorText,     setErrorText]     = useState<stringOrNull>(null);
-  const [shortUrl,      setShortUrl]      = useState<stringOrNull>(null);
+  const [longUrl,   setLongUrl]   = useState<stringOrNull>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isCopied,  setIsCopied]  = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<stringOrNull>(null);
+  const [shortUrl,  setShortUrl]  = useState<stringOrNull>(null);
+  const { Canvas }                = useQRCode();
 
   const isNotEmpty = (str: stringOrNull): boolean => {
     if (str == undefined || str.length == 0) return false;
     return true;
   }
 
+  const [encodedTicket, setEncodedTicket] = useState<stringOrNull>(null);
+  const [shortUrlHost,  setShortUrlHost]  = useState<stringOrNull>(null);
   useEffect(() => {
     if (shortUrlHost == null || 
         (shortUrlHost != null && shortUrlHost != window.location.origin)
@@ -65,7 +67,6 @@ export default function Home() {
   const getEncodedTicket = async (e: { preventDefault: () => void; target: any; }) => {
     e.preventDefault();
     setIsLoading(true);
-    let start = new Date().getTime();
     if (longUrl != null && isNotEmpty(longUrl)) {
       await fetch('/api/short_url', {
         headers: {
@@ -75,8 +76,6 @@ export default function Home() {
         body: JSON.stringify({url: longUrl.toString()})
       })
       .then((response) => {
-        let elapsed = new Date().getTime() - start;
-        console.log("total time elapsed is:", elapsed / 1000);
         return response.json();
       })
       .then((response) => {
@@ -85,7 +84,7 @@ export default function Home() {
       });
     }
     else {
-      setErrorText("Input URL is null");
+      setErrorText("Please enter a url!");
     }
   };
 
@@ -129,7 +128,7 @@ export default function Home() {
                       height={30}
                       width={30}
                       src="/copy.png"
-                      className={styles.copyIcon}
+                      className={styles.icon}
                       priority
                     />
                     <span className={styles.tooltipText}>
@@ -137,11 +136,27 @@ export default function Home() {
                     </span>
                   </div>
                 </div>
+                <div className={styles.qrCodeContainer}>
+                  <span className={styles.scanQrCode}>Scan your zip link</span>
+                  <Canvas
+                    text={shortUrl}
+                    options={{
+                      level: 'M',
+                      margin: 3,
+                      scale: 4,
+                      width: 150,
+                      color: {
+                        dark: '#3d0c59',
+                        light: '#a7abbe',
+                      },
+                    }}
+                  />
+                </div>
               </>
             ) : null}
           </div>
           <div className={styles.errorContainer}>
-              <span className={styles.error}>{errorText}</span>  
+            <span className={styles.error}>{errorText}</span>
           </div>
           {isLoading ? <Loader /> : null}
         </div>

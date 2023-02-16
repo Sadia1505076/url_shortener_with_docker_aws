@@ -80,7 +80,7 @@
   flex-direction: row;
 }
 
-.copyIcon {
+.icon {
   align-self: center;
 }
 
@@ -138,6 +138,19 @@
   color: red;
 }
 
+.qrCodeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  font-size: 1.5rem;
+}
+
+.scanQrCode {
+  margin-bottom: 20px;
+}
+
 /* Mobile */
 @media (max-width: 700px) {
   .container {
@@ -178,5 +191,9 @@
 
   .error {
     font-size: 0.7rem;
+  }
+
+  .qrCodeContainer {
+    font-size: 1rem;
   }
 }
