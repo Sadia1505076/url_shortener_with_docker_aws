@@ -10,7 +10,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const start = new Date().getTime();
     const [_, ticketQueryResult] = await prisma.$transaction([
       prisma.$queryRaw<Tickets64>`REPLACE INTO Tickets64 (stub) VALUES ('a');`,
       prisma.tickets64.findFirst({
@@ -18,6 +17,8 @@ export default async function handler(
           stub: 'a'
         }
       })
+      // probably last_insert_id() is faster, but due to replacing the row, there will always be one
+      // entry in the table. So select shouldn't be performance expensive.
     ]);
 
     if(ticketQueryResult != null) {
