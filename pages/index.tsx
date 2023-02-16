@@ -1,6 +1,6 @@
 import Head                    from 'next/head'
 import styles                  from '@/styles/Home.module.css'
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Loader                  from '@/components/Loader/loader';
 import Image                   from 'next/image';
 import { stringOrNull }        from '@/lib/types';
@@ -137,7 +137,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className={styles.qrCodeContainer}>
-                  <span className={styles.scanQrCode}>Scan your BlinkUrl</span>
+                  <span className={styles.scanQrCode}>Scan your BlinkURL</span>
                   <Canvas
                     text={shortUrl}
                     options={{
