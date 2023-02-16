@@ -10,7 +10,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const start = new Date().getTime();
     const [_, ticketQueryResult] = await prisma.$transaction([
       prisma.$queryRaw<Tickets64>`REPLACE INTO Tickets64 (stub) VALUES ('a');`,
       prisma.tickets64.findFirst({

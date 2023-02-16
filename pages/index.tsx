@@ -65,6 +65,7 @@ export default function Home() {
   const getEncodedTicket = async (e: { preventDefault: () => void; target: any; }) => {
     e.preventDefault();
     setIsLoading(true);
+    let start = new Date().getTime();
     if (longUrl != null && isNotEmpty(longUrl)) {
       await fetch('/api/short_url', {
         headers: {
@@ -73,7 +74,11 @@ export default function Home() {
         method: 'POST',
         body: JSON.stringify({url: longUrl.toString()})
       })
-      .then((response) => response.json())
+      .then((response) => {
+        let elapsed = new Date().getTime() - start;
+        console.log("total time elapsed is:", elapsed / 1000);
+        return response.json();
+      })
       .then((response) => {
         setIsLoading(false);
         setEncodedTicket(response.short_url);
