@@ -91,7 +91,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Zip-Link</title>
+        <title>Blinkify - shorten your URL</title>
         <meta name="description" content="URL shortener" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -113,7 +113,7 @@ export default function Home() {
           <div className={styles.shortUrlContainer}>
             {shortUrl != null ? (
               <>
-                <p>Your ZipLink is:</p>
+                <p>Your BlinkURL is:</p>
                 <div className={styles.innerContainer}>
                   <a className={styles.shortUrl} href={shortUrl}>
                     {shortUrl}
@@ -137,7 +137,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className={styles.qrCodeContainer}>
-                  <span className={styles.scanQrCode}>Scan your zip link</span>
+                  <span className={styles.scanQrCode}>Scan your BlinkUrl</span>
                   <Canvas
                     text={shortUrl}
                     options={{
