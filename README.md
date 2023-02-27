@@ -1,10 +1,10 @@
 ## Getting Started
 This is a Url Shortener built with Next.js, prisma and MySql on planetscale.
 
-For shortening, the [Ticket Server](https://code.flickr.net/2010/02/08/ticket-servers-distributed-unique-primary-keys-on-the-cheap/) approach and Base62 encoding are used.
+For shortening, the [Ticket Server](https://code.flickr.net/2010/02/08/ticket-servers-distributed-unique-primary-keys-on-the-cheap/) approach and Base62 encoding are used. Along with the actual short url, a QR code of it is shown on the UI for user convenience.
 
 Ongoing Work:
-Along with the actual short url, a QR code of it will be shown on the UI for user convenience.
+Make the API calls faster.
 
 To run the project locally:
 ```bash
