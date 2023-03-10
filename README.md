@@ -7,13 +7,19 @@ Ongoing Work:
 Make the API calls faster.
 
 To run the project locally:
+Create a .env file in the root folder. Add database url of your database:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+DATABASE_URL='mysql://USER_NAME:PASSWORD@HOST:PORT/DB_NAME'
 ```
+Then run:
+
+```bash
+npm install
+npx prisma generate
+npm run dev
+
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 
