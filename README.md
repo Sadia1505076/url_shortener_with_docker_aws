@@ -6,6 +6,7 @@ For shortening, the [Ticket Server](https://code.flickr.net/2010/02/08/ticket-se
 The [vercel-version](https://blinkify.vercel.app/) of this project is very slow. To make the API calls faster, I have deployed the containerized version of this project in AWS lightsail using docker. For ssl certification, nginx is used.
 
 To run the project locally:
+
 Create a .env file in the root folder. Add database url of your database:
 ```bash
 DATABASE_URL='mysql://USER_NAME:PASSWORD@HOST:PORT/DB_NAME'
