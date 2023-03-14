@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  nextjs:
+    image: url_shortener
+    container_name: url_shortener
+    build:
+      context: ./
+    ports:
+      - "3000:3000"
+    restart: always
+  nginx:
+    image: nginx
+    container_name: nginx
+    build:
+      context: ./nginx/
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/
+    restart: always
