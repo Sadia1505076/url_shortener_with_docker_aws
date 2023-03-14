@@ -5,6 +5,72 @@ import Loader                  from '@/components/Loader/loader';
 import Image                   from 'next/image';
 import { stringOrNull }        from '@/lib/types';
 import { useQRCode } from 'next-qrcode';
+import styled from "styled-components";
+
+const EntryWrapper = styled.div`
+      width:100%;
+      display:flex:
+      flex-direction:column;
+      margin:-17rem auto 0 auto;
+      > *:not(:last-child) {
+      	margin-bottom:2rem;
+      }
+`;
+const NewLink= styled(motion.div)`
+     display:flex;
+     justify-content:space-between;
+     align-items:center;
+     baclground:var(--color-white);
+     width:100%;
+     padding:2rem 3rem;
+     font-size:1.6rem;
+     background-color:var(--color-white);
+     border-radius:10px;
+     opacity:0;
+     transform:translateY(200%);
+     > div {
+        display:flex;
+        align-items:center;
+        > *:not(:last-child){
+        	margin-right:1.5rem;
+            ${mediaQry.lessThan("tablet-small")`
+                margin:0 0 2rem;
+            `}
+        }
+        span {
+        	color:var(--color-primary-1);
+        }
+        ${mediaQry.lessThan("tablet-small")`
+            flex-direction:column;
+        `}
+     }
+     a {
+     	border-radius:5px;
+     }
+     ${mediaQry.lessThan("tablet-small")`
+        flex-direction:column;
+        * {
+            width:100%;
+        }
+        span {
+            margin-bottom:2rem;
+        }
+        div > a {
+            text-align:center;
+        }
+    `}
+`;
+const CopyBtn = styled.button`
+    ${btnStyles}
+    outline:none;
+    border:none;
+    border-radius:5px;
+    background-color:${({copied}) => copied ? "var(--color-primary-2)":"var(--color-primary-1)"};
+    transition:opacity .2s ease:
+    :hover {
+        opacity:${({copied}) => copied ?"1":".7"};
+    }
+`;
 
 export default function Home() {
   const [longUrl,   setLongUrl]   = useState<stringOrNull>(null);
