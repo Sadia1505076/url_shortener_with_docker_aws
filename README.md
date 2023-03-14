@@ -1,5 +1,7 @@
 ## Getting Started
-This is a Url Shortener built with Next.js, prisma and MySql on planetscale. 
+This is a Url Shortener built with Next.js, prisma and MySql on planetscale.
+
+*Live Demo*: [https://go.sadia.dev/](https://go.sadia.dev/)
 
 For shortening, the [Ticket Server](https://code.flickr.net/2010/02/08/ticket-servers-distributed-unique-primary-keys-on-the-cheap/) approach and Base62 encoding are used. Along with the actual short url, a QR code of it is shown on the UI for user convenience.
 
