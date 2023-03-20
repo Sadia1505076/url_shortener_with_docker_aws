@@ -1,4 +1,21 @@
-import { stringOrNull } from "./types";
+import {generateMedia} from "styled-media-query";
+import {css} from "styled-components";
+
+export const mediaQry = generateMedia({
+   "laptop-small":"64em",
+   "tablet":"50em",
+   "tablet-small":"43.75em",
+   "phone":"31.25em"
+});
+
+// export const btnStyles = css`
+// 	  cursor:pointer;
+// 	  font-size:1.6rem;
+// 	  background-color:${props => (props.bgcolor === "true" ? "var(--color-primary-1)" :"none")};
+// 	  color:${props => (props.bgcolor === "true" ? "var(--color-white)":"var(--color-text)")};
+// 	  padding:${props => props.padding};
+// 	  align-self:flex-start;
+// `;
 
 export function customJsonStringify(json: any): string {
   return JSON.stringify(json, (_, value) =>

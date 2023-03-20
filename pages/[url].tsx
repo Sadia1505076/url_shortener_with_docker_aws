@@ -9,7 +9,7 @@ export default function dummy() {
 export const getServerSideProps: GetServerSideProps = async ({query}) => {
   let short_url:   string | null = query.url?.toString() || null;
   let destination: string        = "/404";
-  if (short_url != null && short_url != undefined) {
+  if (short_url != null && short_url != undefined && short_url.length > 0) {
     const views = await prisma.url.findFirst({
       where: {
         short_url

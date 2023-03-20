@@ -6,6 +6,8 @@ import Image                   from 'next/image';
 import { stringOrNull }        from '@/lib/types';
 import { useQRCode } from 'next-qrcode';
 import styled from "styled-components";
+import {motion} from "framer-motion";
+import { mediaQry } from '@/lib/helper';
 
 const EntryWrapper = styled.div`
       width:100%;
@@ -16,7 +18,7 @@ const EntryWrapper = styled.div`
       	margin-bottom:2rem;
       }
 `;
-const NewLink= styled(motion.div)`
+const NewLink = styled(motion.div)`
      display:flex;
      justify-content:space-between;
      align-items:center;
@@ -60,15 +62,21 @@ const NewLink= styled(motion.div)`
         }
     `}
 `;
+
 const CopyBtn = styled.button`
-    ${btnStyles}
+    cursor:pointer;
+    font-size:1.6rem;
+    background-color:var(--color-primary-1);
+    color:var(--color-white);
+    padding:;
+    align-self:flex-start;
     outline:none;
     border:none;
     border-radius:5px;
-    background-color:${({copied}) => copied ? "var(--color-primary-2)":"var(--color-primary-1)"};
+    background-color:${copied => copied ? "var(--color-primary-2)":"var(--color-primary-1)"};
     transition:opacity .2s ease:
     :hover {
-        opacity:${({copied}) => copied ?"1":".7"};
+        opacity:${copied => copied ?"1":".7"};
     }
 `;
 
@@ -157,15 +165,32 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Blinkify - shorten your URL</title>
+        <title>ZipLink - shorten your URL</title>
         <meta name="description" content="URL shortener" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        <nav>
+          <ul>
+            <li><a href="#first">First</a></li>
+            <li><a href="#second">Second</a></li>
+            <li><a href="#third">Third</a></li>
+          </ul>
+        </nav>
         <div className={styles.container}>
-          <p className={styles.heading}>Shorten Your URL</p>
-          <form method="post" onSubmit={getEncodedTicket}>
+          <div className={styles.descriptionContainer}>
+            <div className={styles.description}>
+              <p className={styles.heading}>Create your own url</p>
+              <p className={styles.shortDes}>
+                Our new URL shortener simplifies long and complicated links into user-friendly web addresses.
+                With just a few clicks, you can streamline your blog posts, social media profiles, and product pages.
+                Say goodbye to cluttered URLs and hello to efficient sharing with our cutting-edge technology.
+              </p>
+            </div>
+            <img src="woman_coder.jpg" alt="Women Coder" className={styles.coder}/>
+          </div>
+          <form method="post" onSubmit={getEncodedTicket} className={styles.form}>
             <input
               type="url"
               id="long_url"
@@ -174,7 +199,9 @@ export default function Home() {
               onChange={onChange}
               required
             />
-            <button type="submit">Submit</button>
+            <div className={styles.submitContainer}>
+              <button type="submit" className={styles.submitButton}>ZipLink</button>
+            </div>
           </form>
           <div className={styles.shortUrlContainer}>
             {shortUrl != null ? (
