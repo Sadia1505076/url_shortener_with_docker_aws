@@ -1,12 +1,9 @@
-import {generateMedia} from "styled-media-query";
-import {css} from "styled-components";
-
-export const mediaQry = generateMedia({
-   "laptop-small":"64em",
-   "tablet":"50em",
-   "tablet-small":"43.75em",
-   "phone":"31.25em"
-});
+// export const mediaQry = generateMedia({
+//    "laptop-small":"64em",
+//    "tablet":"50em",
+//    "tablet-small":"43.75em",
+//    "phone":"31.25em"
+// });
 
 // export const btnStyles = css`
 // 	  cursor:pointer;
