@@ -4,78 +4,7 @@ import { useEffect, useState } from 'react';
 import Loader                  from '@/components/Loader/loader';
 import Image                   from 'next/image';
 import { stringOrNull }        from '@/lib/types';
-import { useQRCode } from 'next-qrcode';
-
-// const EntryWrapper = styled.div`
-//       width:100%;
-//       display:flex:
-//       flex-direction:column;
-//       margin:-17rem auto 0 auto;
-//       > *:not(:last-child) {
-//       	margin-bottom:2rem;
-//       }
-// `;
-// const NewLink = styled(motion.div)`
-//      display:flex;
-//      justify-content:space-between;
-//      align-items:center;
-//      baclground:var(--color-white);
-//      width:100%;
-//      padding:2rem 3rem;
-//      font-size:1.6rem;
-//      background-color:var(--color-white);
-//      border-radius:10px;
-//      opacity:0;
-//      transform:translateY(200%);
-//      > div {
-//         display:flex;
-//         align-items:center;
-//         > *:not(:last-child){
-//         	margin-right:1.5rem;
-//             ${mediaQry.lessThan("tablet-small")`
-//                 margin:0 0 2rem;
-//             `}
-//         }
-//         span {
-//         	color:var(--color-primary-1);
-//         }
-//         ${mediaQry.lessThan("tablet-small")`
-//             flex-direction:column;
-//         `}
-//      }
-//      a {
-//      	border-radius:5px;
-//      }
-//      ${mediaQry.lessThan("tablet-small")`
-//         flex-direction:column;
-//         * {
-//             width:100%;
-//         }
-//         span {
-//             margin-bottom:2rem;
-//         }
-//         div > a {
-//             text-align:center;
-//         }
-//     `}
-// `;
-
-// const CopyBtn = styled.button`
-//     cursor:pointer;
-//     font-size:1.6rem;
-//     background-color:var(--color-primary-1);
-//     color:var(--color-white);
-//     padding:;
-//     align-self:flex-start;
-//     outline:none;
-//     border:none;
-//     border-radius:5px;
-//     background-color:${copied => copied ? "var(--color-primary-2)":"var(--color-primary-1)"};
-//     transition:opacity .2s ease:
-//     :hover {
-//         opacity:${copied => copied ?"1":".7"};
-//     }
-// `;
+import { useQRCode }           from 'next-qrcode';
 
 export default function Home() {
   const [longUrl,   setLongUrl]   = useState<stringOrNull>(null);
@@ -152,6 +81,11 @@ export default function Home() {
       .then((response) => {
         setIsLoading(false);
         setEncodedTicket(response.short_url);
+      })
+      .finally(() => {
+        let input = document.getElementById('long_url') as HTMLInputElement;
+        if (input)
+          input.value = '';
       });
     }
     else {
@@ -163,16 +97,21 @@ export default function Home() {
     <>
       <Head>
         <title>ZipLink - shorten your URL</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"/>
+        <link rel="manifest" href="/favicons/site.webmanifest"/>
         <meta name="description" content="URL shortener" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
         <nav>
-          <ul>
-            <li><a href="#first">First</a></li>
-            <li><a href="#second">Second</a></li>
-            <li><a href="#third">Third</a></li>
+          <ul className={styles.navUl}>
+            <li className={styles.navItem}><a href="/" className={styles.ziplink}>ZipLink</a></li>
+            <li className={styles.navItem}>
+              <a href="https://github.com/Sadia1505076/url_shortener_with_docker_aws" target='_blank'><img src="github.png" alt="github" className={styles.github}/></a>
+              <a href="https://sadia.dev" target='_blank'><img src="author.png" alt="author" className={styles.github}/></a>
+            </li>
           </ul>
         </nav>
         <div className={styles.container}>
@@ -200,34 +139,36 @@ export default function Home() {
               <button type="submit" className={styles.submitButton}>ZipLink</button>
             </div>
           </form>
-          <div className={styles.shortUrlContainer}>
+          <div className={styles.result}>
             {shortUrl != null ? (
               <>
-                <p>Your BlinkURL is:</p>
-                <div className={styles.innerContainer}>
-                  <a className={styles.shortUrl} href={shortUrl}>
-                    {shortUrl}
-                  </a>
-                  <div
-                    className={styles.copyIconContainer}
-                    onClick={() => copy(shortUrl)}
-                    onMouseLeave={() => setIsCopied(false)}
-                  >
-                    <Image
-                      alt="copy"
-                      height={30}
-                      width={30}
-                      src="/copy.png"
-                      className={styles.icon}
-                      priority
-                    />
-                    <span className={styles.tooltipText}>
-                      {isCopied ? "Copied" : "Copy on clipboard"}
-                    </span>
+                <div className={styles.urlContainer}>
+                  <p className={styles.longUrl}>{longUrl}</p>
+                  <div className={styles.shortUrlContainer}>
+                    <a className={styles.shortUrl} href={shortUrl}>
+                      {shortUrl}
+                    </a>
+                    <div
+                      className={styles.copyIconContainer}
+                      onClick={() => copy(shortUrl)}
+                      onMouseLeave={() => setIsCopied(false)}
+                    >
+                      <Image
+                        alt="copy"
+                        height={30}
+                        width={30}
+                        src="/copy.png"
+                        className={styles.icon}
+                        priority
+                      />
+                      <span className={styles.tooltipText}>
+                        {isCopied ? "Copied" : "Copy on clipboard"}
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div className={styles.qrCodeContainer}>
-                  <span className={styles.scanQrCode}>Scan your BlinkURL</span>
+                  <span className={styles.scanQrCode}>Scan your ZipLink</span>
                   <Canvas
                     text={shortUrl}
                     options={{
