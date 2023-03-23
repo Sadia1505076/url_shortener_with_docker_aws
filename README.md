@@ -21,5 +21,8 @@ run:
 ```bash
 docker-compose up --build -d
 ```
+*Demo:*
+![image](https://user-images.githubusercontent.com/38729047/227378428-ff2dda40-7ae1-4e9f-a090-ea9a8d5048b1.png)
+![image](https://user-images.githubusercontent.com/38729047/227378535-07221a5f-30fa-40c2-a0f8-cb9ac8dea569.png)
 
 
