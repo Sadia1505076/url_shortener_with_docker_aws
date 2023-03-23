@@ -5,6 +5,7 @@ import Loader                  from '@/components/Loader/loader';
 import Image                   from 'next/image';
 import { stringOrNull }        from '@/lib/types';
 import { useQRCode }           from 'next-qrcode';
+import Link from 'next/link';
 
 export default function Home() {
   const [longUrl,   setLongUrl]   = useState<stringOrNull>(null);
@@ -97,20 +98,57 @@ export default function Home() {
     <>
       <Head>
         <title>ZipLink - shorten your URL</title>
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png"/>
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png"/>
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"/>
-        <link rel="manifest" href="/favicons/site.webmanifest"/>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/favicons/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicons/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicons/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/favicons/site.webmanifest" />
         <meta name="description" content="URL shortener" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main className={styles.main}>
         <nav>
           <ul className={styles.navUl}>
-            <li className={styles.navItem}><a href="/" className={styles.ziplink}>ZipLink</a></li>
             <li className={styles.navItem}>
-              <a href="https://github.com/Sadia1505076/url_shortener_with_docker_aws" target='_blank'><img src="github.png" alt="github" className={styles.github}/></a>
-              <a href="https://sadia.dev" target='_blank'><img src="author.png" alt="author" className={styles.github}/></a>
+              <Link href="/" className={styles.ziplink}>
+                ZipLink
+              </Link>
+            </li>
+            <li className={styles.navItem}>
+              <a
+                href="https://github.com/Sadia1505076/url_shortener_with_docker_aws"
+                rel="noreferrer"
+              >
+                <Image
+                  src="/github.png"
+                  alt="github"
+                  className={styles.github}
+                  width={30}
+                  height={30}
+                />
+              </a>
+              <a href="https://sadia.dev" rel="noreferrer">
+                <Image
+                  src="/author.png"
+                  alt="author"
+                  className={styles.github}
+                  width={30}
+                  height={30}
+                />
+              </a>
             </li>
           </ul>
         </nav>
@@ -119,14 +157,24 @@ export default function Home() {
             <div className={styles.description}>
               <p className={styles.heading}>Create your own url</p>
               <p className={styles.shortDes}>
-                Our new URL shortener simplifies long and complicated links into user-friendly web addresses.
-                With just a few clicks, you can streamline your blog posts, social media profiles, and product pages.
-                Say goodbye to cluttered URLs and hello to efficient sharing with our cutting-edge technology.
+                Our new URL shortener simplifies long and complicated links into
+                user-friendly web addresses. With just a few clicks, you can
+                streamline your blog posts, social media profiles, and product
+                pages. Say goodbye to cluttered URLs and hello to efficient
+                sharing with our cutting-edge technology.
               </p>
             </div>
-            <img src="woman_coder.jpg" alt="Women Coder" className={styles.coder}/>
+            <img
+              src="woman_coder.jpg"
+              alt="Women Coder"
+              className={styles.coder}
+            />
           </div>
-          <form method="post" onSubmit={getEncodedTicket} className={styles.form}>
+          <form
+            method="post"
+            onSubmit={getEncodedTicket}
+            className={styles.form}
+          >
             <input
               type="url"
               id="long_url"
@@ -136,7 +184,9 @@ export default function Home() {
               required
             />
             <div className={styles.submitContainer}>
-              <button type="submit" className={styles.submitButton}>ZipLink</button>
+              <button type="submit" className={styles.submitButton}>
+                ZipLink
+              </button>
             </div>
           </form>
           <div className={styles.result}>
@@ -172,13 +222,13 @@ export default function Home() {
                   <Canvas
                     text={shortUrl}
                     options={{
-                      level: 'M',
+                      level: "M",
                       margin: 3,
                       scale: 4,
                       width: 150,
                       color: {
-                        dark: '#3d0c59',
-                        light: '#a7abbe',
+                        dark: "#3d0c59",
+                        light: "#a7abbe",
                       },
                     }}
                   />
