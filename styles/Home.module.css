@@ -34,9 +34,7 @@
 }
 
 .container a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
   gap: 0.5rem;
   text-decoration: underline;
   overflow: hidden;
@@ -269,10 +267,8 @@ button.submitButton:hover {
   }
 
   .longUrl {
-    display: flex;
+    display: block;
     width: 100%;
-    justify-content: center;
-    align-items: center;
     margin-top: 10px;
   }
 
