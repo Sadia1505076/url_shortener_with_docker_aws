@@ -40,7 +40,7 @@ export default async function handler(
             short_url,
           }
         });
-        return res.status(201).json({short_url: short_url});
+        return res.status(201).json({short_url: short_url, long_url: req.body.url});
       }
       catch(error)  {
         return res.status(500).json("Failed to capture ticket!" + error);

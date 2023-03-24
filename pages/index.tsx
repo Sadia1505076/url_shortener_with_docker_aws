@@ -5,14 +5,15 @@ import Loader                  from '@/components/Loader/loader';
 import Image                   from 'next/image';
 import { stringOrNull }        from '@/lib/types';
 import { useQRCode }           from 'next-qrcode';
-import Link from 'next/link';
+import Link                    from 'next/link';
 
 export default function Home() {
-  const [longUrl,   setLongUrl]   = useState<stringOrNull>(null);
+  const [input,     setInput]     = useState<stringOrNull>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isCopied,  setIsCopied]  = useState<boolean>(false);
   const [errorText, setErrorText] = useState<stringOrNull>(null);
   const [shortUrl,  setShortUrl]  = useState<stringOrNull>(null);
+  const [longUrl,   setLongUrl]   = useState<stringOrNull>(null);
   const { Canvas }                = useQRCode();
 
   const isNotEmpty = (str: stringOrNull): boolean => {
@@ -62,19 +63,19 @@ export default function Home() {
   }
 
   const onChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    setLongUrl(e.currentTarget.value);
+    setInput(e.currentTarget.value);
   };
 
   const getEncodedTicket = async (e: { preventDefault: () => void; target: any; }) => {
     e.preventDefault();
     setIsLoading(true);
-    if (longUrl != null && isNotEmpty(longUrl)) {
+    if (input != null && isNotEmpty(input)) {
       await fetch('/api/short_url', {
         headers: {
           'Content-Type': 'application/json'
         },
         method: 'POST',
-        body: JSON.stringify({url: longUrl.toString()})
+        body: JSON.stringify({url: input.toString()})
       })
       .then((response) => {
         return response.json();
@@ -82,9 +83,10 @@ export default function Home() {
       .then((response) => {
         setIsLoading(false);
         setEncodedTicket(response.short_url);
+        setLongUrl(response.long_url);
       })
       .finally(() => {
-        let input = document.getElementById('long_url') as HTMLInputElement;
+        let input = document.getElementById('input') as HTMLInputElement;
         if (input)
           input.value = '';
       });
@@ -177,8 +179,8 @@ export default function Home() {
           >
             <input
               type="url"
-              id="long_url"
-              name="long_url"
+              id="input"
+              name="input"
               placeholder="Your URL.."
               onChange={onChange}
               required
